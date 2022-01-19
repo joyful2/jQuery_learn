@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<script src="Underscore.js"></script>
-		<script>
-           var cb = _.callbacks("once memory");
 
-		</script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script src="Underscore.js"></script>
+    <script>
+        // callbacks 队列实现： add, fire, ---once,unique,memory,stoponfalse
+
+
+
+
+
+
+        // var cb = _.callbacks("once memory");
+
+
+        var cb = _.callbacks('memory')
+        function fn1 () {
+            console.log('1');
+            // return false
+        }
+
+        function fn2 () {
+            console.log('2');
+            // return false
+        }
+
+        cb.add(fn1)
+        cb.fire()
+
+        cb.add(fn2)
+
+
+
+    </script>
+</body>
+
 </html>
