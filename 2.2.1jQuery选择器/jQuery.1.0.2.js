@@ -8,7 +8,7 @@
     var testExp = /^\s*(<[\w\W]+>)[^>]*$/;
     var rejectExp = /^<(\w+)\s*\/?>(?:<\/\1>|)$/;
 
-
+    
     var version = "1.0.1";
     var jQuery = function(selector, context) {
         return new jQuery.prototype.init(selector, context);

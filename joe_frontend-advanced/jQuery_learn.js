@@ -6,8 +6,7 @@
 		return new jQuery.prototype.init(selector, context);
 	}
 
-
-
+var rootjQuery
 	jQuery.fn = jQuery.prototype = {
     length: 0, // todo: 为什么要共享length，不应该每个实例单独维护吗？
     jquery: version,
@@ -39,15 +38,29 @@
           this.selector = selector
           return this
         }
+      } else if (toString.call(selector) === "[object Function]"){
+        rootjQuery.ready(selector)
       }
 
 		},
 		css: function() {
 
-		}
+		},
+    ready:function(selector){
+      // todo 和课程给的源码有差异
+      // 监听不应该在页面加载前就执行，  应该课程直播里是否漏了一次调用？
+      document.addEventListener('domContentLoaded',jQuery.ready,false)
+      if(this.isDomReady){
+        selector.call(document)
+      } else {
+        this.domReadyCbLs.push(selector)
+      }
+    }
+
+
 	}
 
-  
+   rootjQuery = jQuery(document)
 
 
   jQuery.fn.extend = jQuery.extend = function(){
@@ -104,7 +117,27 @@
 		},
 		isArray: function(obj){
 			return toString.call(obj) === "[object Array]";
-		}
+		},
+    slice: function(start,end){
+      // todo 依据源码 看 slice 的实现是否准确
+      let arr = []
+      start = start || 0;
+      end = end || this.length;
+      for(let i=start;i<end;i++){
+        arr.push(arr[i])
+      }
+      return arr 
+    },
+    isDomReady:false,
+    domReadyCbLs:[],
+    ready:function(){
+      this.isDomReady = true
+      this.domReadyCbLs.forEach((cb)=>{
+        cb.call(document)
+      })
+      this.domReadyCbLs = null;
+    }
+
 
 	});
 

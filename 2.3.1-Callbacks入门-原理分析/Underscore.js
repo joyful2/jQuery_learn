@@ -1,7 +1,7 @@
 (function(root) {
     var optionsCache = {}; // 缓存
 
-// todo unique 没有实现呀
+// todo unique 实现等 在直播课讲的那部分 源码呢？
 
     var _ = {
         callbacks: function(options) {
@@ -51,7 +51,7 @@
 
     function createOptions(options) {
         
-        var object = optionsCache[options] = {}; // todo 为什么要搞这么复杂的结构
+        var object = optionsCache[options] = {}; // toLearn optionsCache用于缓存
         options.split(/\s+/).forEach(function(value) {
             object[value] = true;
         });

@@ -14,22 +14,27 @@
     var cb = {
       add:function(){
         var args = [].slice.call(arguments)
-        if(option.unique){
-          //  去重
-          args = Array.from(new Set(args))
-        }
         args.forEach((arg)=>{
           if(toString.call(arg) === '[object Function]'){
-            list.push(arg)
+            if(!option.unique || !args.includes(arg)){
+              // todo 检查如下注释的代码是否正确
+              // inArray(arr,ele){
+              //   return !arr.length ? -1 : ''.indexOf.call(arr,ele)
+              // }
+              // has(arr,ele){
+              //   return inArray(arr,ele) > -1
+              // }
+            if(!option.unique || !args.includes(arg)){
+              list.push(arg)
+            }
           }
+        }
         })
         start = list.length
 
         if(memory){
           starts = start
-
           cb.fire(memory)
-
         }
 
       },
