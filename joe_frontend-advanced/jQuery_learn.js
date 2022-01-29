@@ -40,6 +40,7 @@ var rootjQuery
         }
       } else if (toString.call(selector) === "[object Function]"){
         rootjQuery.ready(selector)
+        
       }
 
 		},
