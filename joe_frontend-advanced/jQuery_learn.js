@@ -47,7 +47,6 @@ var rootjQuery
 
 		},
     ready:function(selector){
-      // todo 和课程给的源码有差异
       // 监听不应该在页面加载前就执行，  应该课程直播里是否漏了一次调用？
       document.addEventListener('domContentLoaded',jQuery.ready,false)
       if(this.isDomReady){
@@ -119,12 +118,11 @@ var rootjQuery
 			return toString.call(obj) === "[object Array]";
 		},
     slice: function(start,end){
-      // todo 依据源码 看 slice 的实现是否准确
       let arr = []
       start = start || 0;
       end = end || this.length;
       for(let i=start;i<end;i++){
-        arr.push(arr[i])
+        arr.push(this[i])
       }
       return arr 
     },
@@ -172,9 +170,6 @@ var rootjQuery
     console.log(parse)
     return [context.createElement(parse[1])];
 
-    // todo 解析字符串，并创建dom : eg: '<a>' => 拿到a对象
-    // const eleName = data.slice(data.indexOf('<')+1,data.indexOf('>'))
-    // return [context.createElement(eleName)]
   }
 
 
