@@ -1,15 +1,15 @@
 (function (root){
-  var optCache = {} // todo optCache 待修改
+  var optCache = {} // toLearn optCache 
   var _ = {
     callbacks: function(option){
     option = typeof option === 'string' ? (optCache[option] || creatOpt(option)) : {}
      
-    // memory : add时，立即调用，且用上次调用的入参 todo 貌似有问题
-    // once ： 只执行一次fire  todo 有问题
+    // memory : add时，立即调用，且用上次调用的入参 toLearn
+    // once ： 只执行一次fire  toLearn
     // unique : 相同函数不会重复执行  ok
     // stopOnFalse  ok
 
-    var list = [],index,fired=false,start,starts,memory; // todo : 1 start 逻辑有问题
+    var list = [],index,fired=false,start,starts,memory; // toLearn : 1 starts 和 start 的使用
 
     var cb = {
       add:function(){
@@ -17,13 +17,7 @@
         args.forEach((arg)=>{
           if(toString.call(arg) === '[object Function]'){
             if(!option.unique || !args.includes(arg)){
-              // todo 检查如下注释的代码是否正确
-              // inArray(arr,ele){
-              //   return !arr.length ? -1 : ''.indexOf.call(arr,ele)
-              // }
-              // has(arr,ele){
-              //   return inArray(arr,ele) > -1
-              // }
+
             if(!option.unique || !args.includes(arg)){
               list.push(arg)
             }
