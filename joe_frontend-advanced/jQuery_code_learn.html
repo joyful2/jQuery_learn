@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>joe jQuery_code_learn</title>
+  <script src="jQuery_learn.js" ></script>
+  <script src="_.js"></script>
+
+</head>
+<body>
+  <div id="box"></div>
+
+  
+  <script>
+
+    // var ret = {name:"max",list:{age:"30"}};
+    // 			var res = {list:{sex:"女"}};
+    // 			//任意对象扩展
+    // 			var obj = $.extend(true,{}, ret, res);       //=>  name  age
+    // 			console.log(obj);   //name:"max"  list:{sex:"女", age:"30" }
+    
+    // console.log($("<a>"))  //创建DOM
+    // 		  console.log($("#box"))
+    // 		   console.log($(document))
+    
+    
+        // memory : add时，立即调用，且用上次调用的入参
+        // once ： 只执行一次fire
+        // unique : 相同函数不会重复执行
+        // stopOnFalse
+    
+        // var cb = _.callbacks('memory')
+        //     function fn1 () {
+        //         console.log('1');
+        //         // return false
+        //     }
+    
+        //     function fn2 () {
+        //         console.log('2');
+        //         // return false
+        //     }
+    
+        //     cb.add(fn1)
+        //     cb.fire()
+    
+        //     cb.add(fn2)
+    
+    function fn(age){
+      // this.name=name
+      this.age=age
+      console.log(this)
+      // console.log(this.name)
+      // console.log(this.age)
+    }
+    var obj = {name:'joe11'}
+    // fn.call(obj)
+    const fnCopy = fn.bind(obj,12)
+    fnCopy()
+    
+    console.log('111');
+    
+    $(()=>{
+      console.log('loaded??');
+    })
+      </script>
+</body>
+</html>

@@ -1,63 +1,61 @@
-< !DOCTYPE html >
-    <
-    html >
+(function(root) {
+    var optionsCache = {}; // 缓存
 
-    <
-    head >
-    <
-    meta charset = "utf-8" >
-    <
-    title > < /title> <
-    /head>
+    // todo unique 实现等 在直播课讲的那部分 源码呢？
 
-<
-body >
-    <
-    script src = "Underscore.js" > < /script> <
-    script >
-    // callbacks 队列实现： add, fire, ---once,unique,memory,stoponfalse
-
-
-
-
-
-
-    var cb = _.callbacks("once memory"); <
-/script> <
-/body>
-
-<
-/html>             start = list.length;
-args.forEach(function(fn) {
-    if (toString.call(fn) === "[object Function]") {
-        list.push(fn);
+    var _ = {
+        callbacks: function(options) {
+            options = typeof options === "string" ? (optionsCache[options] || createOptions(options)) : {};
+            var list = [];
+            var index, length, testting, memory, start, starts;
+            var fire = function(data) {
+                memory = options.memory && data;
+                index = starts || 0;
+                start = 0;
+                testting = true;
+                length = list.length;
+                for (; index < length; index++) {
+                    if (list[index].apply(data[0], data[1]) === false && options.stopOnfalse) {
+                        break;
+                    }
+                }
+            }
+            var self = {
+                add: function() {
+                    var args = Array.prototype.slice.call(arguments);
+                    start = list.length;
+                    args.forEach(function(fn) {
+                        if (toString.call(fn) === "[object Function]") {
+                            list.push(fn);
+                        }
+                    });
+                    if (memory) {
+                        starts = start;
+                        fire(memory);
+                    }
+                },
+                fireWith: function(context, arguments) {
+                    var args = [context, arguments];
+                    if (!options.once || !testting) {
+                        fire(args);
+                    }
+                },
+                fire: function() {
+                    self.fireWith(this, arguments);
+                }
+            }
+            return self;
+        },
     }
-});
-if (memory) {
-    starts = start;
-    fire(memory);
-}
-},
-fireWith: function(context, arguments) {
-        var args = [context, arguments];
-        if (!options.once || !testting) {
-            fire(args);
-        }
-    },
-    fire: function() {
-        self.fireWith(this, arguments);
-    }
-}
-return self;
-},
-}
 
-function createOptions(options) {
-    var object = optionsCache[options] = {};
-    options.split(/\s+/).forEach(function(value) {
-        object[value] = true;
-    });
-    return object;
-}
-root._ = _;
+
+    function createOptions(options) {
+
+        var object = optionsCache[options] = {}; // toLearn optionsCache用于缓存
+        options.split(/\s+/).forEach(function(value) {
+            object[value] = true;
+        });
+        return object;
+    }
+    root._ = _;
 })(this);

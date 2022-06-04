@@ -16,7 +16,29 @@
 
 
 
-        var cb = _.callbacks("once memory");
+        // var cb = _.callbacks("once memory");
+
+
+        var cb = _.callbacks('memory')
+
+        function fn1() {
+            console.log('1');
+            // return false
+        }
+
+        function fn2() {
+            console.log('2');
+            // return false
+        }
+
+        cb.add(fn1)
+        cb.fire()
+
+        cb.add(fn2)
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded 1')
+        })
     </script>
 </body>
 

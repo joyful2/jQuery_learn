@@ -9,13 +9,14 @@
     var rejectExp = /^<(\w+)\s*\/?>(?:<\/\1>|)$/;
 
 
+
     var version = "1.0.1";
     var jQuery = function(selector, context) {
         return new jQuery.prototype.init(selector, context);
     }
 
     jQuery.fn = jQuery.prototype = { //原型对象
-        length: 0, // todo: 为什么要共享length，不应该每个势力单独维护吗？
+        length: 0, // todo: 为什么要共享length，不应该每个实例单独维护吗？
         jquery: version,
         selector: "",
         init: function(selector, context) {
@@ -35,7 +36,16 @@
                     //this  
                     jQuery.merge(this, jQuery.parseHTML(selector, context));
                     //查询DOM节点
-                } else {
+                } else { <<
+                    <<
+                    << < HEAD
+                        ===
+                        ===
+                        =
+                        // todo 为什么不是 context 下查找？
+                        >>>
+                        >>>
+                        > d8a21fbe8222aa4320dcf17faa3cda4cfab22e28
                     elem = document.querySelectorAll(selector);
                     // todo： elem明明有length,为什么要转成数组？
                     var elems = Array.prototype.slice.call(elem);
