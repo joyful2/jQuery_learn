@@ -36,16 +36,8 @@
                     //this  
                     jQuery.merge(this, jQuery.parseHTML(selector, context));
                     //查询DOM节点
-                } else { <<
-                    <<
-                    << < HEAD
-                        ===
-                        ===
-                        =
-                        // todo 为什么不是 context 下查找？
-                        >>>
-                        >>>
-                        > d8a21fbe8222aa4320dcf17faa3cda4cfab22e28
+                } else {
+                    // todo 为什么不是 context 下查找？
                     elem = document.querySelectorAll(selector);
                     // todo： elem明明有length,为什么要转成数组？
                     var elems = Array.prototype.slice.call(elem);
@@ -56,10 +48,15 @@
                     this.context = context;
                     this.selector = selector;
                 }
-            } else if (selector.nodeType) {
+            } else if (selector.nodeType) { // 传入dom对象, 比如document
                 this.context = this[0] = selector;
                 this.length = 1;
                 return this;
+            } else if (isFunction(selector)) { // todo 传入函数的情况，为什么这么写？
+                return root.ready !== undefined ?
+                    root.ready(selector) :
+                    // Execute immediately if ready is not present
+                    selector(jQuery);
             }
 
         },
